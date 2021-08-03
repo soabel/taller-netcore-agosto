@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <None Remove="Aplicacion\" />
+    <None Remove="Infraestructura\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Infraestructure\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Taller.Facturacion.Productos.Domain\Taller.Facturacion.Productos.Domain.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+    <ProjectReference Include="..\Taller.Facturacion.Productos.Application\Taller.Facturacion.Productos.Application.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+  </ItemGroup>
+</Project>
