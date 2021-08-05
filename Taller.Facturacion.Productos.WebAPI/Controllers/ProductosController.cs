@@ -22,7 +22,7 @@ namespace Taller.Facturacion.Productos.WebAPI.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Producto>> Get()
         {
-            return Ok(this._productoService.findAll());
+            return Ok(this._productoService.FindAll());
         }
 
         // GET: api/values
@@ -47,21 +47,23 @@ namespace Taller.Facturacion.Productos.WebAPI.Controllers
                 return NotFound();
             }
 
-            return Ok(this._productoService.findById(id));
+            return Ok(this._productoService.FindById(id));
         }
 
         // POST api/values
         [HttpPost]
-        public Producto Post([FromBody] Producto producto)
+        public ActionResult<Producto> Post([FromBody] Producto producto)
         {
-            return producto ;
+            this._productoService.Save(producto);
+            return Ok(producto);
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Producto producto)
+        public ActionResult<Producto> Put(int id, [FromBody] Producto producto)
         {
-            
+            this._productoService.Update(producto);
+            return Ok(producto);
         }
 
         // PATCH api/values/5

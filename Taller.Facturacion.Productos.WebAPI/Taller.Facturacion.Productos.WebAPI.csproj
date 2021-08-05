@@ -8,6 +8,8 @@
   <ItemGroup>
     <None Remove="Aplicacion\" />
     <None Remove="Infraestructura\" />
+    <None Remove="Swashbuckle.AspNetCore" />
+    <None Remove="Microsoft.EntityFrameworkCore.SqlServer" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Infraestructure\" />
@@ -19,5 +21,12 @@
     <ProjectReference Include="..\Taller.Facturacion.Productos.Application\Taller.Facturacion.Productos.Application.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
+    <ProjectReference Include="..\Taller.Factguracion.Productos.Infraestucture.Persistence\Taller.Facturacion.Productos.Infraestucture.Persistence.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.8" />
   </ItemGroup>
 </Project>

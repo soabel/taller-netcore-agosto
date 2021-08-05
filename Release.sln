@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taller.Facturacion.Producto
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taller.Facturacion.Productos.Domain", "Taller.Facturacion.Productos.Domain\Taller.Facturacion.Productos.Domain.csproj", "{BBCFF26F-1882-4E25-BC1D-0167C08F495D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taller.Factguracion.Productos.Infraestucture.Persistence", "Taller.Factguracion.Productos.Infraestucture.Persistence\Taller.Factguracion.Productos.Infraestucture.Persistence.csproj", "{897DD125-4C77-467E-A4A0-5C4BD4B7351C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taller.Facturacion.Productos.Infraestucture.Persistence", "Taller.Factguracion.Productos.Infraestucture.Persistence\Taller.Facturacion.Productos.Infraestucture.Persistence.csproj", "{897DD125-4C77-467E-A4A0-5C4BD4B7351C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taller.Facturacion.Productos.Infraestructure.Core", "Taller.Facturacion.Productos.Infraestructure.Core\Taller.Facturacion.Productos.Infraestructure.Core.csproj", "{78E64CD3-FEDE-444D-BC83-8E9F37F52239}"
 EndProject

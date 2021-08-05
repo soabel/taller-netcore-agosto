@@ -14,5 +14,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Taller.Facturacion.Productos.Domain\Taller.Facturacion.Productos.Domain.csproj" />
+    <ProjectReference Include="..\Taller.Factguracion.Productos.Infraestucture.Persistence\Taller.Facturacion.Productos.Infraestucture.Persistence.csproj" />
   </ItemGroup>
 </Project>
