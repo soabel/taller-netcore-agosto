@@ -1,61 +1,63 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Taller.Facturacion.Productos.Application.Dtos;
 using Taller.Facturacion.Productos.Application.Services.Contracts;
 using Taller.Facturacion.Productos.Domain.Entities;
+using Taller.Facturacion.Productos.Domain.Repositories;
 using Taller.Facturacion.Productos.Infraestucture.Persistence;
 
 namespace Taller.Facturacion.Productos.Application.Services
 {
     public class ProductoService : IProductoService
     {
-        private readonly DatabaseContext _databaseContext;
-        public ProductoService(DatabaseContext databaseContext) {
-            _databaseContext = databaseContext;
+        private readonly IProductoRepository _productoRepository;
+        private readonly IMapper _mapper;
+
+
+        public ProductoService(IProductoRepository productoRepository, IMapper mapper) {
+            _productoRepository = productoRepository;
+            _mapper = mapper;
+        }
+
+        public void Delete(int id)
+        {
+            this._productoRepository.Delete(id);
         }
 
         public IEnumerable<Producto> FindAll()
         {
-            //return new Producto[] { new Producto { Id=1, Nombre="TV 50'", Precio=400, Stock=10, CategoriaId=1, Categoria= new Categoria{ Id=1, Nombre="Electrodomesticos" } }
-            //, new Producto { Id=2, Nombre="Laptop 15' Lenovo", Precio=800, Stock=4 , CategoriaId=1, Categoria= new Categoria{ Id=1, Nombre="Computo" }  } };
-
-            return _databaseContext
-                .Productos.Include("Categoria")
-                .ToList();
-
+            return _productoRepository.FindAll();
         }
 
         public Producto FindById(int id)
         {
-            return _databaseContext.Productos.Include(p => p.Categoria)
-                .SingleOrDefault(x => x.ProductoId == id);
+            return _productoRepository.FindById(id);
+        }
 
-            //return new Producto { ProductoId = 2, Nombre = "Laptop 15' Lenovo", Precio = 800, Stock = 4, CategoriaId = 1, Categoria = new Categoria { Id = 1, Nombre = "Computo" } };
+        public IEnumerable<ProductoDto> FindProductsWithCagegory()
+        {
+            var productos = _productoRepository.FindAll();
+
+            //return productos.Select(p => new ProductoDto { Categoria = p.Category.Nombre,
+            //    Nombre = p.Nombre, ProductoId = p.ProductoId, Stock = p.Stock });
+
+            return _mapper.Map<IEnumerable<ProductoDto>>(productos);
         }
 
         public void Save(Producto product)
         {
-            _databaseContext.Add(product);
-            _databaseContext.SaveChanges();
-            
+            _productoRepository.Save(product);
         }
 
         public void Update(Producto product)
         {
-            //var productoExistente = _databaseContext.Productos.Find(product.ProductoId);
-
-            //productoExistente.Nombre = product.Nombre;
-            //productoExistente.Precio = product.Precio;
-            //productoExistente.CategoriaId = product.CategoriaId;
-            //productoExistente.Stock = product.Stock;
-
-            //_databaseContext.SaveChanges();
-
-            _databaseContext.Update(product);
-
-            _databaseContext.SaveChanges();
+            _productoRepository.Update(product);
 
         }
+
+        
     }
 }

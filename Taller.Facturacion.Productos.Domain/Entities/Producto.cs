@@ -12,8 +12,15 @@ namespace Taller.Facturacion.Productos.Domain.Entities
 
         public decimal Precio { get; set; }
         public int Stock { get; set; }
-        public int CategoriaId { get; set; }
+        //[Column("CategoriaId")]
+        //public int CategoryId { get; set; }
 
-        public Categoria Categoria { get; set; }
+        //[ForeignKey("CategoryId")]
+        //public Categoria Category { get; set; }
+
+
+        public int CategoryId { get; set; }
+
+        public Categoria Category { get; set; }
     }
 }

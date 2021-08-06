@@ -29,11 +29,18 @@ namespace Taller.Facturacion.Productos.Infraestucture.Persistence
                entity.ToTable("Producto", "Catalogo");
                entity.Property(x => x.ProductoId).HasColumnName("Id");
                entity.Property(x => x.Precio).HasColumnName("PrecioUnitario");
+                entity.Property(x => x.CategoryId).HasColumnName("CategoriaId");
+                entity.HasOne<Categoria>(x => x.Category)
+                .WithMany(x => x.Productos)
+                .HasForeignKey(x => x.CategoryId);
+
+
+
             });
 
-            modelBuilder.Entity<Categoria>(entity => {
-                entity.ToTable("Categoria", "Catalogo");
-            });
+            //modelBuilder.Entity<Categoria>(entity => {
+            //    entity.ToTable("Categoria", "Catalogo");
+            //});
 
           
         }

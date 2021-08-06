@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Taller.Facturacion.Productos.Application.Dtos;
 using Taller.Facturacion.Productos.Application.Services.Contracts;
 using Taller.Facturacion.Productos.Domain.Entities;
 
@@ -23,6 +24,12 @@ namespace Taller.Facturacion.Productos.WebAPI.Controllers
         public ActionResult<IEnumerable<Producto>> Get()
         {
             return Ok(this._productoService.FindAll());
+        }
+
+        [HttpGet("/with-categories")]
+        public ActionResult<IEnumerable<ProductoDto>> FindProductsWithCagegory()
+        {
+            return Ok(this._productoService.FindProductsWithCagegory());
         }
 
         // GET: api/values
@@ -75,9 +82,10 @@ namespace Taller.Facturacion.Productos.WebAPI.Controllers
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
-            
-        }
+            this._productoService.Delete(id);
+            return Ok();
+       }
     }
 }

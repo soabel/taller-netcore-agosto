@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -13,7 +14,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Taller.Facturacion.Productos.Application.Services;
 using Taller.Facturacion.Productos.Application.Services.Contracts;
+using Taller.Facturacion.Productos.Domain.Repositories;
 using Taller.Facturacion.Productos.Infraestucture.Persistence;
+using Taller.Facturacion.Productos.Infraestucture.Persistence.Repositories;
 
 namespace Taller.Facturacion.Productos.WebAPI
 {
@@ -34,17 +37,25 @@ namespace Taller.Facturacion.Productos.WebAPI
             services.AddScoped<IProductoService, ProductoService>();
             //services.AddTransient<IProductoService, ProductoService>();
 
+
+            services.AddScoped<IProductoRepository, ProductoRepository>();
+
             var connectionString = Configuration.GetConnectionString("DatabaseConnection");
 
             services.AddDbContext<DatabaseContext>(options =>
                options.UseSqlServer(connectionString), ServiceLifetime.Transient);
 
-            services.AddControllers();
+            services.AddControllers()
+                .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen();
+
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+
         }
-    
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
