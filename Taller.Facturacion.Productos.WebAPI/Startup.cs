@@ -35,10 +35,15 @@ namespace Taller.Facturacion.Productos.WebAPI
 
             //services.AddSingleton<IProductoService, ProductoService>();
             services.AddScoped<IProductoService, ProductoService>();
+            services.AddScoped<ICategoriaService, CategoriaService>();
             //services.AddTransient<IProductoService, ProductoService>();
 
 
             services.AddScoped<IProductoRepository, ProductoRepository>();
+            services.AddScoped<ICategoriaRepository, CategoriaRepository>();
+
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
 
             var connectionString = Configuration.GetConnectionString("DatabaseConnection");
 

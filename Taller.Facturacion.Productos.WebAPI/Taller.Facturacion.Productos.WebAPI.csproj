@@ -14,10 +14,12 @@
     <None Remove="AutoMapper.Extensions.Microsoft.DependencyInjection" />
     <None Remove="Microsoft.AspNetCore.Mvc.NewtonsoftJson" />
     <None Remove="Mappers\" />
+    <None Remove="Wrappers\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Infraestructure\" />
     <Folder Include="Mappers\" />
+    <Folder Include="Wrappers\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Taller.Facturacion.Productos.Domain\Taller.Facturacion.Productos.Domain.csproj">

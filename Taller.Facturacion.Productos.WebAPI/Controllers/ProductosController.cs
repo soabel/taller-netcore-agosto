@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Taller.Facturacion.Productos.Application.Dtos;
 using Taller.Facturacion.Productos.Application.Services.Contracts;
 using Taller.Facturacion.Productos.Domain.Entities;
+using Taller.Facturacion.Productos.WebAPI.Wrappers;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -61,8 +63,41 @@ namespace Taller.Facturacion.Productos.WebAPI.Controllers
         [HttpPost]
         public ActionResult<Producto> Post([FromBody] Producto producto)
         {
-            this._productoService.Save(producto);
-            return Ok(producto);
+            //if (producto.Nombre.Length < 3) {
+            //    return BadRequest("El producto debe tener al menos 3 caracteres");
+            //}
+
+            //if (!this.ModelState.IsValid) {
+            //    return BadRequest(this.ModelState.ToArray());
+            //}
+
+            //this._productoService.Save(producto);
+            //return Ok(producto);
+
+
+            var response = new BaseResponse<Producto>();
+
+            if (!this.ModelState.IsValid)
+            {
+                response.Errores = this.ModelState.ToArray();
+                return BadRequest(response);
+            }
+
+            try
+            {
+                response.Code = (int)HttpStatusCode.OK;
+                this._productoService.Save(producto);
+
+                response.Data = producto;
+            }
+            catch (Exception ex)
+            {
+                response.Errores = null;
+                response.Code = (int)HttpStatusCode.BadRequest;
+            }
+
+            return Ok(response);
+
         }
 
         // PUT api/values/5
