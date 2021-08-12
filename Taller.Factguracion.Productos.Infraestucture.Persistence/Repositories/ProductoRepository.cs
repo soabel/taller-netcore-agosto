@@ -4,6 +4,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Taller.Facturacion.Productos.Domain.Entities;
 using Taller.Facturacion.Productos.Domain.Repositories;
+using Taller.Facturacion.Productos.Infraestructure.Core.Exceptions;
 
 namespace Taller.Facturacion.Productos.Infraestucture.Persistence.Repositories
 {
@@ -20,7 +21,7 @@ namespace Taller.Facturacion.Productos.Infraestucture.Persistence.Repositories
             var entity = _databaseContext.Productos.Find(id);
             if (entity == null)
             {
-                throw new Exception("Elemento no existe");
+                throw new NotFoundCustomException(id.ToString());
             }
             _databaseContext.Remove(entity);
             _databaseContext.SaveChanges();

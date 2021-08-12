@@ -4,6 +4,7 @@ using System.Linq;
 using Taller.Facturacion.Productos.Application.Services.Contracts;
 using Taller.Facturacion.Productos.Domain.Entities;
 using Taller.Facturacion.Productos.Domain.Repositories;
+using Taller.Facturacion.Productos.Infraestructure.Core.Exceptions;
 
 namespace Taller.Facturacion.Productos.Application.Services
 {
@@ -30,7 +31,11 @@ namespace Taller.Facturacion.Productos.Application.Services
 
         public Categoria FindById(int id)
         {
-            return this._categoriaRepository.FindById(id);
+            var result = this._categoriaRepository.FindById(id);
+            if (result == null) {
+                throw new NotFoundCustomException(id.ToString());
+            }
+            return result;
         }
 
         public void Save(Categoria product)

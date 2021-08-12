@@ -83,18 +83,18 @@ namespace Taller.Facturacion.Productos.WebAPI.Controllers
                 return BadRequest(response);
             }
 
-            try
-            {
+            //try
+            //{
                 response.Code = (int)HttpStatusCode.OK;
                 this._productoService.Save(producto);
 
                 response.Data = producto;
-            }
-            catch (Exception ex)
-            {
-                response.Errores = null;
-                response.Code = (int)HttpStatusCode.BadRequest;
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    response.Errores = null;
+            //    response.Code = (int)HttpStatusCode.BadRequest;
+            //}
 
             return Ok(response);
 

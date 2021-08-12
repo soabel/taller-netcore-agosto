@@ -7,6 +7,7 @@ using Taller.Facturacion.Productos.Application.Dtos;
 using Taller.Facturacion.Productos.Application.Services.Contracts;
 using Taller.Facturacion.Productos.Domain.Entities;
 using Taller.Facturacion.Productos.Domain.Repositories;
+using Taller.Facturacion.Productos.Infraestructure.Core.Exceptions;
 using Taller.Facturacion.Productos.Infraestucture.Persistence;
 
 namespace Taller.Facturacion.Productos.Application.Services
@@ -49,6 +50,10 @@ namespace Taller.Facturacion.Productos.Application.Services
 
         public void Save(Producto product)
         {
+            if (product.Precio <= 0) {
+                throw new PriceNotValidException(product.Precio.ToString());
+            }
+
             _productoRepository.Save(product);
         }
 
