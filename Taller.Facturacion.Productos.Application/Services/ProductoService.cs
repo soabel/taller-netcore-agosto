@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Taller.Facturacion.Productos.Application.Dtos;
 using Taller.Facturacion.Productos.Application.Services.Contracts;
 using Taller.Facturacion.Productos.Domain.Entities;
@@ -16,11 +17,12 @@ namespace Taller.Facturacion.Productos.Application.Services
     {
         private readonly IProductoRepository _productoRepository;
         private readonly IMapper _mapper;
+        private readonly ILogger<ProductoService> _logger;
 
-
-        public ProductoService(IProductoRepository productoRepository, IMapper mapper) {
+        public ProductoService(IProductoRepository productoRepository, IMapper mapper, ILogger<ProductoService> logger) {
             _productoRepository = productoRepository;
             _mapper = mapper;
+            _logger = logger;
         }
 
         public void Delete(int id)
@@ -30,6 +32,7 @@ namespace Taller.Facturacion.Productos.Application.Services
 
         public IEnumerable<Producto> FindAll()
         {
+            this._logger.LogInformation("call Producto FindAll");
             return _productoRepository.FindAll();
         }
 

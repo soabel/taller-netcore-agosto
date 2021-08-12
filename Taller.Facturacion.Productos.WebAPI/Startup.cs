@@ -67,12 +67,19 @@ namespace Taller.Facturacion.Productos.WebAPI
 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,  ILogger<Startup> logger)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            logger.LogInformation("Mensaje Information");
+            logger.LogCritical("Mensaje Critical");
+            logger.LogDebug("Mensaje Debug");
+            logger.LogError("Mensaje Error");
+            logger.LogTrace("Mensaje Trace");
+            logger.LogWarning("Mensaje Warning");
 
 
             //app.UseExceptionHandler(appError =>

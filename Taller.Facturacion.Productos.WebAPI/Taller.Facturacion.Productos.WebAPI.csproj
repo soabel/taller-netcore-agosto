@@ -15,6 +15,9 @@
     <None Remove="Microsoft.AspNetCore.Mvc.NewtonsoftJson" />
     <None Remove="Mappers\" />
     <None Remove="Wrappers\" />
+    <None Remove="Serilog" />
+    <None Remove="Serilog.Extensions.Logging" />
+    <None Remove="Serilog.Sinks.File" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Infraestructure\" />
@@ -41,5 +44,8 @@
     <PackageReference Include="FluentValidation.AspNetCore" Version="10.3.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.0" />
+    <PackageReference Include="Serilog" Version="2.10.0" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="3.0.1" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
   </ItemGroup>
 </Project>
