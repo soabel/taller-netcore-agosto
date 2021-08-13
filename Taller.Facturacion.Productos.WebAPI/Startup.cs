@@ -91,6 +91,8 @@ namespace Taller.Facturacion.Productos.WebAPI
             logger.LogTrace("Mensaje Trace");
             logger.LogWarning("Mensaje Warning");
 
+            logger.LogInformation($"MyKey : {Configuration["MyKey"]}");
+
 
             //app.UseExceptionHandler(appError =>
             //{
