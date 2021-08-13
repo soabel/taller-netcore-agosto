@@ -15,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Serilog;
 using Taller.Facturacion.Productos.Application.Services;
 using Taller.Facturacion.Productos.Application.Services.Contracts;
 using Taller.Facturacion.Productos.Domain.Repositories;
@@ -26,9 +27,16 @@ namespace Taller.Facturacion.Productos.WebAPI
 {
     public class Startup
     {
+        private object configSettings;
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            Log.Logger = new LoggerConfiguration()
+                .WriteTo.File(configuration["Logging:LogPath"], rollOnFileSizeLimit: true, fileSizeLimitBytes: 1024)
+                .CreateLogger();
+
         }
 
         public IConfiguration Configuration { get; }
@@ -67,12 +75,14 @@ namespace Taller.Facturacion.Productos.WebAPI
 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,  ILogger<Startup> logger)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,  ILogger<Startup> logger, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            loggerFactory.AddSerilog();
 
             logger.LogInformation("Mensaje Information");
             logger.LogCritical("Mensaje Critical");
