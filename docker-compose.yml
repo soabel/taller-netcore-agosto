@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  taller.facturacion.productos.webapi:
+    image: ${DOCKER_REGISTRY-}tallerfacturacionproductos
+    build:
+      context: .
+      dockerfile: Taller.Facturacion.Productos.WebAPI/Dockerfile
