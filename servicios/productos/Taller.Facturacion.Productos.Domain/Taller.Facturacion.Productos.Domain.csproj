@@ -8,10 +8,14 @@
     <None Remove="Entities\" />
     <None Remove="Repositories\" />
     <None Remove="Services\" />
+    <None Remove="Services\Contracts\" />
+    <None Remove="Dtos\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\" />
     <Folder Include="Repositories\" />
     <Folder Include="Services\" />
+    <Folder Include="Services\Contracts\" />
+    <Folder Include="Dtos\" />
   </ItemGroup>
 </Project>

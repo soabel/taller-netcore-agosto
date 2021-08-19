@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Taller.Facturacion.Ventas.Application.Services.Contracts;
 using Taller.Facturacion.Ventas.Domain.Entities;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -12,19 +13,18 @@ namespace Taller.Facturacion.Ventas.WebAPI.Controllers
     [Route("api/[controller]")]
     public class VentasController : Controller
     {
+        private readonly IVentaService _ventaService;
+        private readonly IProductoService _productoService;
+        public VentasController(IVentaService ventaService, IProductoService productoService) {
+            _ventaService = ventaService;
+            _productoService = productoService;
+        }
+
         // GET: api/values
         [HttpGet]
         public IEnumerable<Venta> Get()
         {
-
-            var resultado = new List<Venta>();
-
-            var venta1  =new Venta { Id = 1, ClienteId = 1, Direccion = "", Fecha = DateTime.Now, Monto = 450, Numero = 1 };
-            venta1.Detalle = new List<VentaDetalle> { new VentaDetalle {Id=1, ProductoId=1, Cantidad=4, Precio=40, Importe=160 }};
-
-            resultado.Add(venta1);
-
-            return resultado; ;
+            return _ventaService.FindAll();
         }
 
         // GET api/values/5
@@ -36,8 +36,18 @@ namespace Taller.Facturacion.Ventas.WebAPI.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async void Post([FromBody] Venta venta)
         {
+            //LLamar a Microservicio de Productos
+            // Obtener Producto
+            // Validar stock
+
+
+            foreach (var detalle in venta.Detalle) {
+                var stockValido = await _productoService.ValidarStockVenta(detalle.ProductoId, detalle.Cantidad);
+            }
+
+            _ventaService.Save(venta);
         }
 
         // PUT api/values/5

@@ -8,9 +8,11 @@ namespace Taller.Facturacion.Ventas.Domain.Entities
         public int Id { get; set; }
         public int Numero { get; set; }
         public int ClienteId { get; set; }
+        public string ClienteNombre { get; set; }
         public DateTime Fecha { get; set; }
         public decimal Monto { get; set; }
         public string Direccion { get; set; }
+        public string Comentario { get; set; }
 
         public IEnumerable<VentaDetalle> Detalle { get; set; }
     }

@@ -7,7 +7,9 @@ using Microsoft.Extensions.Logging;
 using Taller.Facturacion.Productos.Application.Dtos;
 using Taller.Facturacion.Productos.Application.Services.Contracts;
 using Taller.Facturacion.Productos.Domain.Entities;
+using Taller.Facturacion.Productos.Domain.Dtos;
 using Taller.Facturacion.Productos.Domain.Repositories;
+using Taller.Facturacion.Productos.Domain.Services.Contracts;
 using Taller.Facturacion.Productos.Infraestructure.Core.Exceptions;
 using Taller.Facturacion.Productos.Infraestucture.Persistence;
 
@@ -16,11 +18,15 @@ namespace Taller.Facturacion.Productos.Application.Services
     public class ProductoService : IProductoService
     {
         private readonly IProductoRepository _productoRepository;
+        private readonly IProductoDomain _productoDomain;
         private readonly IMapper _mapper;
         private readonly ILogger<ProductoService> _logger;
 
-        public ProductoService(IProductoRepository productoRepository, IMapper mapper, ILogger<ProductoService> logger) {
+        public ProductoService(IProductoRepository productoRepository,
+            IProductoDomain productoDomain,
+            IMapper mapper, ILogger<ProductoService> logger) {
             _productoRepository = productoRepository;
+            _productoDomain = productoDomain;
             _mapper = mapper;
             _logger = logger;
         }
@@ -66,6 +72,9 @@ namespace Taller.Facturacion.Productos.Application.Services
 
         }
 
-        
+        public bool ValidarStockVenta(IEnumerable<ProductoValidarStockDto> productosValidar)
+        {
+            return _productoDomain.ValidarStockVenta(productosValidar);
+        }
     }
 }

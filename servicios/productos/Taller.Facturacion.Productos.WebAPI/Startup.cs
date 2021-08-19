@@ -19,6 +19,8 @@ using Serilog;
 using Taller.Facturacion.Productos.Application.Services;
 using Taller.Facturacion.Productos.Application.Services.Contracts;
 using Taller.Facturacion.Productos.Domain.Repositories;
+using Taller.Facturacion.Productos.Domain.Services;
+using Taller.Facturacion.Productos.Domain.Services.Contracts;
 using Taller.Facturacion.Productos.Infraestructure.Core.Exceptions;
 using Taller.Facturacion.Productos.Infraestucture.Persistence;
 using Taller.Facturacion.Productos.Infraestucture.Persistence.Repositories;
@@ -44,12 +46,24 @@ namespace Taller.Facturacion.Productos.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // TODO: RESTRINGIR A ORIGENES ESPECIFICOS
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: "misOrigenes",
+                    builder =>
+                    {
+                        builder.WithOrigins("*")
+                                .AllowAnyHeader()
+                                .AllowAnyMethod();
+                    });
+            });
 
             //services.AddSingleton<IProductoService, ProductoService>();
             services.AddScoped<IProductoService, ProductoService>();
             services.AddScoped<ICategoriaService, CategoriaService>();
             //services.AddTransient<IProductoService, ProductoService>();
 
+            services.AddScoped<IProductoDomain, ProductoDomain>();
 
             services.AddScoped<IProductoRepository, ProductoRepository>();
             services.AddScoped<ICategoriaRepository, CategoriaRepository>();

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Taller.Facturacion.Productos.Application.Dtos;
 using Taller.Facturacion.Productos.Application.Services.Contracts;
 using Taller.Facturacion.Productos.Domain.Entities;
+using Taller.Facturacion.Productos.Domain.Dtos;
 using Taller.Facturacion.Productos.WebAPI.Wrappers;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -122,5 +123,21 @@ namespace Taller.Facturacion.Productos.WebAPI.Controllers
             this._productoService.Delete(id);
             return Ok();
        }
+
+        //[HttpGet("{id}/validar-stock-venta")]
+        //public ActionResult validarStockVenta(int id, [FromQuery] int cantidad)
+        //{
+        //    var resultado = this._productoService.ValidarStockVenta(id, cantidad);
+        //    return Ok(resultado);
+        //}
+
+        [HttpPost("/validar-stock-venta")]
+        public ActionResult validarStockVenta([FromBody] IEnumerable<ProductoValidarStockDto> productosValidar)
+        {
+            var resultado = this._productoService.ValidarStockVenta(productosValidar);
+            return Ok(resultado);
+        }
+
+
     }
 }
