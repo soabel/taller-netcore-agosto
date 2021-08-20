@@ -16,7 +16,7 @@ namespace Taller.Facturacion.Productos.Domain.Services
             _productoRepository = productoRepository;
         }
 
-        bool IProductoDomain.ValidarStockVenta(IEnumerable<ProductoValidarStockDto> productosValidar)
+        public bool ValidarStockVenta(IEnumerable<ProductoValidarStockDto> productosValidar)
         {
             var productosIds = productosValidar.Select(p => p.ProductoId);
             var productos = _productoRepository.FindAll(p=> productosIds.Contains(p.ProductoId));

@@ -38,7 +38,7 @@ namespace Taller.Facturacion.Ventas.WebAPI
             var connectionString = Configuration.GetConnectionString("DatabaseConnection");
 
             services.AddDbContext<DatabaseContext>(options =>
-               options.UseSqlServer(connectionString), ServiceLifetime.Transient);
+               options.UseSqlServer(connectionString), ServiceLifetime.Scoped);
 
             services.AddControllers()
                 .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);

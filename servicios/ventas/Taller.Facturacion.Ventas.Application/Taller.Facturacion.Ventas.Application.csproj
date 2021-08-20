@@ -9,10 +9,12 @@
     <None Remove="Services\Contracts\" />
     <None Remove="Newtonsoft.Json" />
     <None Remove="Microsoft.Extensions.Http" />
+    <None Remove="Dtos\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
     <Folder Include="Services\Contracts\" />
+    <Folder Include="Dtos\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />

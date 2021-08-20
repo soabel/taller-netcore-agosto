@@ -14,10 +14,9 @@ namespace Taller.Facturacion.Ventas.WebAPI.Controllers
     public class VentasController : Controller
     {
         private readonly IVentaService _ventaService;
-        private readonly IProductoService _productoService;
-        public VentasController(IVentaService ventaService, IProductoService productoService) {
+
+        public VentasController(IVentaService ventaService) {
             _ventaService = ventaService;
-            _productoService = productoService;
         }
 
         // GET: api/values
@@ -42,12 +41,7 @@ namespace Taller.Facturacion.Ventas.WebAPI.Controllers
             // Obtener Producto
             // Validar stock
 
-
-            foreach (var detalle in venta.Detalle) {
-                var stockValido = await _productoService.ValidarStockVenta(detalle.ProductoId, detalle.Cantidad);
-            }
-
-            _ventaService.Save(venta);
+            await _ventaService.Save(venta);
         }
 
         // PUT api/values/5

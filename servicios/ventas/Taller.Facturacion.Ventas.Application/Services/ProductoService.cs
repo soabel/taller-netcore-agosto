@@ -5,7 +5,9 @@ using Taller.Facturacion.Ventas.Application.Services.Contracts;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-
+using Taller.Facturacion.Ventas.Application.Dtos;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Taller.Facturacion.Ventas.Application.Services
 {
@@ -17,17 +19,16 @@ namespace Taller.Facturacion.Ventas.Application.Services
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<bool> ValidarStockVenta(int productoId, int cantidad)
+        public async Task<bool> ValidarStockVenta(IEnumerable<ProductoValidarStockDto> productosValidar)
         {
             try
             {
-              
-                //https://localhost:6002/api/productos/1/validar-stock-venta?cantidad=6
-
                 HttpClient httpClient = _httpClientFactory.CreateClient();
                 httpClient.BaseAddress = new Uri("https://localhost:6002");
 
-                var response = await httpClient.GetAsync($"/api/productos/{productoId}/validar-stock-venta?cantidad={cantidad}");
+                var content = JsonConvert.SerializeObject(productosValidar);
+                var response = await httpClient.PostAsync($"/api/productos/validar-stock-venta",
+                    new StringContent(content, Encoding.UTF8, "application/json"));
                 string responseString = await response.Content.ReadAsStringAsync();
 
                 //var jObject = JObject.Parse(responseString);

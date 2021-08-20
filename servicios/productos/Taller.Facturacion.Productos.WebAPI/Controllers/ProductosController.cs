@@ -131,12 +131,21 @@ namespace Taller.Facturacion.Productos.WebAPI.Controllers
         //    return Ok(resultado);
         //}
 
-        [HttpPost("/validar-stock-venta")]
+        [HttpPost("validar-stock-venta")]
         public ActionResult validarStockVenta([FromBody] IEnumerable<ProductoValidarStockDto> productosValidar)
         {
             var resultado = this._productoService.ValidarStockVenta(productosValidar);
             return Ok(resultado);
         }
+
+
+        //[HttpPost("validar-stock-venta")]
+        //public bool validarStockVenta([FromBody] IEnumerable<ProductoValidarStockDto> productosValidar)
+        //{
+        //    var resultado = this._productoService.ValidarStockVenta(productosValidar);
+
+        //    return resultado;
+        //}
 
 
     }
