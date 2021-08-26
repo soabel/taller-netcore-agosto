@@ -7,14 +7,14 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 WORKDIR /src
-COPY ["Taller.Facturacion.Productos.WebAPI/Taller.Facturacion.Productos.WebAPI.csproj", "Taller.Facturacion.Productos.WebAPI/"]
-COPY ["Taller.Facturacion.Productos.Domain/Taller.Facturacion.Productos.Domain.csproj", "Taller.Facturacion.Productos.Domain/"]
-COPY ["Taller.Facturacion.Productos.Application/Taller.Facturacion.Productos.Application.csproj", "Taller.Facturacion.Productos.Application/"]
-COPY ["Taller.Factguracion.Productos.Infraestucture.Persistence/Taller.Facturacion.Productos.Infraestucture.Persistence.csproj", "Taller.Factguracion.Productos.Infraestucture.Persistence/"]
-COPY ["Taller.Facturacion.Productos.Infraestructure.Core/Taller.Facturacion.Productos.Infraestructure.Core.csproj", "Taller.Facturacion.Productos.Infraestructure.Core/"]
-RUN dotnet restore "Taller.Facturacion.Productos.WebAPI/Taller.Facturacion.Productos.WebAPI.csproj"
+COPY ["servicios/productos/Taller.Facturacion.Productos.WebAPI/Taller.Facturacion.Productos.WebAPI.csproj", "servicios/productos/Taller.Facturacion.Productos.WebAPI/"]
+COPY ["servicios/productos/Taller.Facturacion.Productos.Domain/Taller.Facturacion.Productos.Domain.csproj", "servicios/productos/Taller.Facturacion.Productos.Domain/"]
+COPY ["servicios/productos/Taller.Facturacion.Productos.Application/Taller.Facturacion.Productos.Application.csproj", "servicios/productos/Taller.Facturacion.Productos.Application/"]
+COPY ["servicios/productos/Taller.Factguracion.Productos.Infraestucture.Persistence/Taller.Facturacion.Productos.Infraestucture.Persistence.csproj", "servicios/productos/Taller.Factguracion.Productos.Infraestucture.Persistence/"]
+COPY ["servicios/productos/Taller.Facturacion.Productos.Infraestructure.Core/Taller.Facturacion.Productos.Infraestructure.Core.csproj", "servicios/productos/Taller.Facturacion.Productos.Infraestructure.Core/"]
+RUN dotnet restore "servicios/productos/Taller.Facturacion.Productos.WebAPI/Taller.Facturacion.Productos.WebAPI.csproj"
 COPY . .
-WORKDIR "/src/Taller.Facturacion.Productos.WebAPI"
+WORKDIR "/src/servicios/productos/Taller.Facturacion.Productos.WebAPI"
 RUN dotnet build "Taller.Facturacion.Productos.WebAPI.csproj" -c Release -o /app/build
 
 FROM build AS publish
